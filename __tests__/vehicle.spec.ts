@@ -232,11 +232,11 @@ describe('CanadianVehicle', () => {
     });
 
     const response = await vehicle.start({
-      airCtrl: false,
-      igniOnDuration: 10,
-      airTempvalue: 70,
+      hvac: false,
+      duration: 10,
+      tempature: 70,
       defrost: false,
-      heating1: false,
+      heatedFeatures: false,
     });
     expect(response).toEqual('Vehicle started!');
   });
@@ -274,11 +274,11 @@ describe('CanadianVehicle', () => {
     });
 
     const response = await vehicle.start({
-      airCtrl: false,
-      igniOnDuration: 10,
-      airTempvalue: 70,
+      hvac: false,
+      duration: 10,
+      tempature: 70,
       defrost: false,
-      heating1: false,
+      heatedFeatures: false,
     });
     expect(response).toEqual('Failed to start vehicle');
   });

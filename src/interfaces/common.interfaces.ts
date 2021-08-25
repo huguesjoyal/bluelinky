@@ -409,16 +409,17 @@ export interface VehicleCommandResponse {
 }
 
 export interface VehicleStartOptions {
-  airCtrl?: boolean | string;
-  igniOnDuration: number;
-  airTempvalue?: number;
-  defrost?: boolean | string;
-  heating1?: boolean | string;
+  hvac: boolean;
+  duration: number;
+  temperature: number;
+  defrost: boolean;
+  heatedFeatures: boolean;
 }
 
+// Mainly used for EV's as they dont "start" the engine just HVAC :P
 export interface VehicleClimateOptions {
   defrost: boolean;
-  windscreenHeating: boolean;
+  heatedFeatures: boolean;
   temperature: number;
   unit: string;
 }

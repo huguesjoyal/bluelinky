@@ -127,29 +127,23 @@ export default class CanadianVehicle extends Vehicle {
     }
   }
 
-  /*
-  airCtrl: Boolean,  // climatisation
-  heating1: Boolean, // front defrost, airCtrl will be on
-  defrost: Boolean,  // side mirrors & rear defrost
-  airTempvalue: number | null  // temp in degrees for clim and heating 17-27
-  */
   public async start(startConfig: VehicleStartOptions): Promise<string> {
     logger.debug('Begin startClimate request');
     try {
       const body = {
         hvacInfo: {
-          airCtrl: (startConfig.airCtrl ?? false) || (startConfig.defrost ?? false) ? 1 : 0,
+          // Not quite sure this logic makes sense?
+          airCtrl: (startConfig.hvac ?? false) || (startConfig.defrost ?? false) ? 1 : 0,
           defrost: startConfig.defrost ?? false,
-          // postRemoteFatcStart: 1,
-          heating1: startConfig.heating1 ? 1 : 0,
+          heating1: startConfig.heatedFeatures ? 1 : 0,
         },
       };
 
-      const airTemp = startConfig.airTempvalue;
+      const airTemp = startConfig.tempature;
       // TODO: can we use getTempCode here from util?
       if (airTemp != null) {
         body.hvacInfo['airTemp'] = { value: celciusToTempCode(REGIONS.CA, airTemp), unit: 0, hvacTempType: 1 };
-      } else if ((startConfig.airCtrl ?? false) || (startConfig.defrost ?? false)) {
+      } else if ((startConfig.hvac ?? false) || (startConfig.defrost ?? false)) {
         throw 'air temperature should be specified';
       }
 

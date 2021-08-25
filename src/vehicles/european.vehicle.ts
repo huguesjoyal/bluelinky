@@ -15,6 +15,7 @@ import {
   EVChargeModeTypes,
   VehicleDayTrip,
   VehicleMonthTrip,
+  VehicleStartOptions,
 } from '../interfaces/common.interfaces';
 
 import logger from '../logger';
@@ -45,7 +46,8 @@ export default class EuropeanVehicle extends Vehicle {
     logger.debug(`EU Vehicle ${this.vehicleConfig.id} created`);
   }
 
-  public async start(config: VehicleClimateOptions): Promise<string> {
+  public async start(config: VehicleStartOptions & VehicleClimateOptions): Promise<string> {
+  
     const http = await this.controller.getVehicleHttpService();
     try {
       const response = this.updateRates(await http.post(
@@ -56,7 +58,7 @@ export default class EuropeanVehicle extends Vehicle {
             hvacType: 0,
             options: {
               defrost: config.defrost,
-              heating1: config.windscreenHeating ? 1 : 0,
+              heating1: config.heatedFeatures ? 1 : 0,
             },
             tempCode: celciusToTempCode(REGIONS.EU, config.temperature),
             unit: config.unit,

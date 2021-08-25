@@ -11,6 +11,7 @@ module.exports = {
     'no-console': 2,
     'quotes': [1, 'single', { 'avoidEscape': true }],
     'semi': [1, 'always'],
+    '@typescript-eslint/ban-ts-comment': 0,
   },
   env: {
     browser: true,
