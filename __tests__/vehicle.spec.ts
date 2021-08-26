@@ -234,7 +234,7 @@ describe('CanadianVehicle', () => {
     const response = await vehicle.start({
       hvac: false,
       duration: 10,
-      tempature: 70,
+      temperature: 70,
       defrost: false,
       heatedFeatures: false,
     });
@@ -276,7 +276,7 @@ describe('CanadianVehicle', () => {
     const response = await vehicle.start({
       hvac: false,
       duration: 10,
-      tempature: 70,
+      temperature: 70,
       defrost: false,
       heatedFeatures: false,
     });

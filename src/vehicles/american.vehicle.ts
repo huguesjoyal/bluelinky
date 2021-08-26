@@ -105,7 +105,7 @@ export default class AmericanVehicle extends Vehicle {
       ...{
         hvac: false,
         duration: 10,
-        tempature: 70,
+        temperature: 70,
         defrost: false,
         heatedFeatures: false,
       },
@@ -117,7 +117,7 @@ export default class AmericanVehicle extends Vehicle {
       'airCtrl': +mergedConfig.hvac, // use the unary method to convert to int
       'airTemp': {
         'unit': 1,
-        'value': `${mergedConfig.tempature}`,
+        'value': `${mergedConfig.temperature}`,
       },
       'defrost': mergedConfig.defrost,
       'heating1': +mergedConfig.heatedFeatures, // use the unary method to convert to int
