@@ -38,8 +38,10 @@ const getEndpoints = (baseUrl: string) => ({
   // Car commands with preauth (PIN)
   lock: `${baseUrl}/tods/api/drlck`,
   unlock: `${baseUrl}/tods/api/drulck`,
-  start: `${baseUrl}/tods/api/evc/rfon`,
-  stop: `${baseUrl}/tods/api/evc/rfoff`,
+  // start: `${baseUrl}/tods/api/evc/rfon`,
+  // stop: `${baseUrl}/tods/api/evc/rfoff`,
+  start: `${baseUrl}/tods/api/rmtstrt`,
+  stop: `${baseUrl}/tods/api/rmtstp`,
   startCharge: `${baseUrl}/tods/api/evc/rcstrt`,
   stopCharge: `${baseUrl}/tods/api/evc/rcstp`,
   setChargeTarget: `${baseUrl}/tods/api/evc/setsoc`,

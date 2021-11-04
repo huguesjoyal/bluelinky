@@ -146,21 +146,24 @@ export default class CanadianVehicle extends Vehicle {
     logger.debug('Begin startClimate request');
     try {
       const body = {
-        hvacInfo: {
+        pin: this.controller.userConfig.pin,
+        setting: {
           airCtrl: (startConfig.airCtrl ?? false) || (startConfig.defrost ?? false) ? 1 : 0,
           defrost: startConfig.defrost ?? false,
           // postRemoteFatcStart: 1,
           heating1: startConfig.heating1 ? 1 : 0,
+          igniOnDuration: startConfig.igniOnDuration,
+          ims: 0
         },
       };
 
       const airTemp = startConfig.airTempvalue;
       // TODO: can we use getTempCode here from util?
       if (airTemp != null) {
-        body.hvacInfo['airTemp'] = {
+        body.setting['airTemp'] = {
           value: celciusToTempCode(REGIONS.CA, airTemp),
           unit: 0,
-          hvacTempType: 1,
+          hvacTempType: 0,
         };
       } else if ((startConfig.airCtrl ?? false) || (startConfig.defrost ?? false)) {
         throw 'air temperature should be specified';
@@ -189,6 +192,8 @@ export default class CanadianVehicle extends Vehicle {
       const preAuth = await this.getPreAuth();
       const response = await this.request(this.controller.environment.endpoints.stop, {
         pAuth: preAuth,
+      }, {
+        pin: this.controller.userConfig.pin
       });
       return response;
     } catch (err) {
