@@ -191,10 +191,13 @@ export default class CanadianVehicle extends Vehicle {
     try {
       const preAuth = await this.getPreAuth();
       const response = await this.request(this.controller.environment.endpoints.stop, {
-        pAuth: preAuth,
-      }, {
         pin: this.controller.userConfig.pin
+      }, {
+        pAuth: preAuth,
       });
+      
+      logger.debug(response);
+
       return response;
     } catch (err) {
       throw 'error: ' + err;
